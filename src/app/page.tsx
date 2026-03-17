@@ -1,27 +1,47 @@
-'use client';
-import { signOut, useSession, signIn } from "next-auth/react";
+import { prisma } from "@/lib/prisma";
+import { CreatePostForm } from "@/components/CreatePostForm";
+import { DeletePostButton } from "@/components/DeletePostButton";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
-export default function Home() {
-  const {data : session} = useSession();
+export default async function Home() {
+  const posts = await prisma.post.findMany({
+    orderBy: { createdAt: "desc" },
+    include: { author: true },
+  });
+
+  const session = await getServerSession(authOptions);
 
   return (
-    <main className="p-10">
-      <h1 className="text-3xl font-bold">
-        DevConnect
+    <main className="max-w-2xl mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-6">
+        DevConnect Feed 🚀
       </h1>
 
-      {session ? (
-        <>
-          <p> Welcome, {session.user?.name}!</p>
+      <CreatePostForm />
 
-          <button onClick={() => signOut()} className="mt-4 px-4 py-2 bg-red-500 text-white rounded">Sign Out</button>
-        </>
-      ) : (
-        <>
-        <p>Please sign in to access DevConnect.</p>
-        <button onClick={() => signIn("github")} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">Sign In with GitHub</button>
-        </>
-      )}
-     </main>
+      <div className="mt-8 space-y-4">
+        {posts.map((post) => (
+          <div
+            key={post.id}
+            className="border rounded-xl p-4 shadow-sm"
+          >
+            <p className="font-semibold">
+              {post.author.name}
+            </p>
+
+            <p className="text-gray-600 text-sm">
+              {new Date(post.createdAt).toLocaleString()}
+            </p>
+
+            <p className="mt-2">{post.content}</p>
+
+            {post.authorId === session?.user?.id && (
+              <DeletePostButton postId={post.id} />
+            )}
+          </div>
+        ))}
+      </div>
+    </main>
   );
 }
