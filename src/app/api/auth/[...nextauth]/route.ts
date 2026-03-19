@@ -19,6 +19,16 @@ export const authOptions: NextAuthOptions = {
       return session;
   },
 },
+events: {
+  async createUser({ user }) {
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        username: user.name?.toLowerCase().replace(/\s+/g, ""),
+      },
+    });
+  },
+},
 };
 
 const handler = NextAuth(authOptions);

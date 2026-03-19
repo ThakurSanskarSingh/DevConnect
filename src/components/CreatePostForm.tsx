@@ -22,12 +22,12 @@ export function CreatePostForm() {
         value={content}
         onChange={(e) => setContent(e.target.value)}
         placeholder="Share something..."
-        className="w-full border rounded-lg p-3"
+        className="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-black"
       />
 
       <button
         disabled={isPending}
-        className="bg-black text-white px-4 py-2 rounded-lg"
+        className="bg-black text-white px-5 py-2 rounded-xl hover:bg-gray-800 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
         {isPending ? "Posting..." : "Post"}
       </button>
