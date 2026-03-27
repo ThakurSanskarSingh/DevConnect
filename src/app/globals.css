@@ -40,7 +40,15 @@ body {
   font-family: 'DM Sans', Arial, sans-serif;
   cursor: none;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
+
+@media (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+}
+
 
 /* ─── Typography Helpers ─── */
 .font-bebas {
@@ -79,6 +87,13 @@ body {
   height: 36px;
   background: rgba(198, 241, 53, 0.35);
 }
+
+@media (pointer: coarse) {
+  .cursor-dot {
+    display: none !important;
+  }
+}
+
 
 /* ─── Scroll Reveal ─── */
 .reveal {

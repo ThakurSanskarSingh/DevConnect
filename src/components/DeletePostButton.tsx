@@ -6,10 +6,14 @@ export function DeletePostButton({ postId }: { postId: string }) {
       <input type="hidden" name="postId" value={postId} />
       <button
         type="submit"
-        className="text-red-500 text-sm mt-2"
+        className="font-syne text-[#FF5C28] hover:text-[#ff3d00] transition-colors flex items-center gap-1.5"
+        style={{ fontSize: '12px', fontWeight: 600, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+        title="Delete Post"
       >
-        Delete
+        <span>🗑️</span>
+        <span className="hidden sm:inline">Delete</span>
       </button>
     </form>
   );
 }
+

@@ -74,19 +74,21 @@ export default function CreatePostPage() {
             )}
 
             {/* Editor split */}
-            <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '2fr 3fr', minHeight: 'calc(100vh - 64px)' }}>
+            <div className="flex-1 grid grid-cols-1 lg:grid-cols-[2fr_3fr]" style={{ minHeight: 'calc(100vh - 64px)' }}>
+
 
                 {/* ── Left Panel ── */}
                 <aside
+                    className="p-6 sm:p-8"
                     style={{
                         borderRight: '1px solid var(--border)',
-                        padding: '32px',
                         display: 'flex',
                         flexDirection: 'column',
                         gap: '24px',
                         overflowY: 'auto',
                     }}
                 >
+
                     {/* Header */}
                     <div>
                         <p className="font-bebas" style={{ fontSize: '13px', color: '#C6F135', letterSpacing: '0.12em', marginBottom: '4px' }}>POST DETAILS</p>
@@ -302,18 +304,16 @@ export default function CreatePostPage() {
             <button
                 onClick={handleSubmit}
                 disabled={isPending}
-                className="btn-primary animate-glow-pulse"
+                className="btn-primary animate-glow-pulse fixed bottom-6 right-6 sm:bottom-8 sm:right-8"
                 style={{
-                    position: 'fixed',
-                    bottom: '32px',
-                    right: '32px',
-                    padding: '16px 32px',
-                    fontSize: '16px',
+                    padding: '12px 24px',
+                    fontSize: '14px',
                     borderRadius: '40px',
                     zIndex: 100,
                     opacity: isPending ? 0.7 : 1,
                 }}
             >
+
                 {isPending ? 'Publishing...' : 'PUBLISH POST'}
             </button>
         </div>

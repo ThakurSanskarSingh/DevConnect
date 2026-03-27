@@ -43,22 +43,20 @@ export default async function ProfilePage({
 
       {/* ── Banner ── */}
       <div
+        className="h-[180px] sm:h-[260px] p-6 sm:p-8 lg:p-12 flex items-end"
         style={{
           width: '100%',
-          height: '260px',
           background: `
             radial-gradient(ellipse at 30% 60%, hsla(${hue}, 80%, 50%, 0.15) 0%, transparent 60%),
             radial-gradient(ellipse at 70% 30%, rgba(198,241,53,0.08) 0%, transparent 50%),
             #111111
           `,
           position: 'relative',
-          display: 'flex',
-          alignItems: 'flex-end',
-          padding: '32px 48px',
           borderBottom: '1px solid var(--border)',
           overflow: 'hidden',
         }}
       >
+
         {/* Tech-pattern grid */}
         <div style={{
           position: 'absolute',
@@ -86,22 +84,14 @@ export default async function ProfilePage({
        
       </div>
 
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 32px 80px' }}>
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8 pb-20">
+
 
         {/* ── Profile Card ── */}
         <div
-          className="dp-card"
-          style={{
-            display: 'flex',
-            alignItems: 'flex-start',
-            gap: '24px',
-            padding: '24px',
-            marginTop: '-40px',
-            position: 'relative',
-            zIndex: 2,
-            flexWrap: 'wrap',
-          }}
+          className="dp-card flex flex-col sm:flex-row items-start gap-6 p-6 -mt-10 relative z-10"
         >
+
           {/* Avatar */}
           <div className="avatar-ring" style={{ width: 96, height: 96, flexShrink: 0 }}>
             <div className="avatar-inner" style={{ fontFamily: "'Syne'", fontWeight: 800, fontSize: '36px', color: '#C6F135' }}>
@@ -128,9 +118,10 @@ export default async function ProfilePage({
           </div>
 
           {/* Stats column */}
-          <div style={{ display: 'flex', gap: '32px', alignItems: 'center', flexWrap: 'wrap' }}>
+          <div className="flex flex-wrap gap-6 sm:gap-8 items-center w-full sm:w-auto mt-4 sm:mt-0">
             <StatBox label="Posts" value={user.posts.length} />
             <StatBox label="Reactions" value={totalLikes} />
+
             <div style={{ display: 'flex', gap: '10px' }}>
               {!isOwn && (
                 <button className="btn-primary" style={{ padding: '10px 24px', fontSize: '14px' }}>Follow</button>
@@ -186,12 +177,13 @@ export default async function ProfilePage({
                   title={post.title}
                   excerpt={stripMarkdown(post.content).slice(0, 180)}
                   tags={post.tags}
-                  author={{ name: user.name, username: user.username }}
+                  author={{ id: user.id, name: user.name, username: user.username }}
                   createdAt={post.createdAt}
                   commentCount={post.comments.length}
                   likeCount={post.likes.length}
                   featured={i === 0}
                 />
+
               ))}
             </div>
           )}

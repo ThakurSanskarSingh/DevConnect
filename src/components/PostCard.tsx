@@ -2,7 +2,10 @@
 
 import { useRef } from 'react';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import { ReactionBar } from './ReactionBar';
+import { DeletePostButton } from './DeletePostButton';
+
 
 interface PostCardProps {
     id: string;
@@ -10,6 +13,7 @@ interface PostCardProps {
     excerpt: string;
     tags: string[];
     author: {
+        id?: string;
         name: string | null;
         username?: string | null;
     };
@@ -18,6 +22,7 @@ interface PostCardProps {
     likeCount: number;
     featured?: boolean;
 }
+
 
 function timeAgo(date: Date | string) {
     const now = new Date();
@@ -30,7 +35,11 @@ function timeAgo(date: Date | string) {
 }
 
 export function PostCard({ id, title, excerpt, tags, author, createdAt, commentCount, likeCount, featured }: PostCardProps) {
+    const { data: session } = useSession();
     const cardRef = useRef<HTMLDivElement>(null);
+
+    const isAuthor = session?.user && (session.user as { id: string }).id === author.id;
+
 
     function onMouseMove(e: React.MouseEvent<HTMLDivElement>) {
         const card = cardRef.current;
@@ -52,14 +61,14 @@ export function PostCard({ id, title, excerpt, tags, author, createdAt, commentC
             ref={cardRef}
             onMouseMove={onMouseMove}
             onMouseLeave={onMouseLeave}
-            className="dp-card tilt-card"
+            className="dp-card tilt-card p-4 sm:p-6"
             style={{
-                padding: '24px',
                 position: 'relative',
                 borderLeft: featured ? '3px solid #C6F135' : undefined,
                 transition: 'border-color 0.25s, transform 0.2s, box-shadow 0.25s',
             }}
         >
+
             {/* Author row */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
                 {/* Avatar */}
@@ -74,18 +83,20 @@ export function PostCard({ id, title, excerpt, tags, author, createdAt, commentC
                         style={{
                             fontFamily: "'Syne', sans-serif",
                             fontWeight: 700,
-                            fontSize: '14px',
+                            fontSize: '13px',
                             color: '#F0F0F0',
                             textDecoration: 'none',
                         }}
+                        className="truncate block sm:inline"
                     >
                         @{author.username || author.name?.toLowerCase().replace(/\s+/g, '')}
                     </Link>
-                    <span style={{ color: '#444', marginLeft: '8px', fontSize: '13px' }}>·</span>
-                    <span style={{ color: '#888', fontSize: '12px', marginLeft: '6px', fontFamily: "'DM Sans', sans-serif" }}>
+                    <span className="hidden sm:inline" style={{ color: '#444', marginLeft: '8px', fontSize: '13px' }}>·</span>
+                    <span style={{ color: '#888', fontSize: '11px', marginLeft: '6px', fontFamily: "'DM Sans', sans-serif" }} className="block sm:inline">
                         {timeAgo(createdAt)}
                     </span>
                 </div>
+
                 {/* Tags */}
                 <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
                     {tags.slice(0, 2).map((tag) => (
@@ -100,7 +111,7 @@ export function PostCard({ id, title, excerpt, tags, author, createdAt, commentC
                     style={{
                         fontFamily: "'Syne', sans-serif",
                         fontWeight: 700,
-                        fontSize: featured ? '20px' : '17px',
+                        fontSize: featured ? 'clamp(17px, 4vw, 20px)' : 'clamp(15px, 3.5vw, 17px)',
                         color: '#F0F0F0',
                         marginBottom: '8px',
                         lineHeight: 1.3,
@@ -108,6 +119,7 @@ export function PostCard({ id, title, excerpt, tags, author, createdAt, commentC
                 >
                     {title}
                 </h3>
+
             </Link>
 
             {/* Excerpt */}
@@ -131,6 +143,7 @@ export function PostCard({ id, title, excerpt, tags, author, createdAt, commentC
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
                 <ReactionBar postId={id} initialCounts={{ fire: likeCount }} />
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    {isAuthor && <DeletePostButton postId={id} />}
                     <Link
                         href={`/post/${id}`}
                         style={{
@@ -146,6 +159,7 @@ export function PostCard({ id, title, excerpt, tags, author, createdAt, commentC
                         💬 {commentCount}
                     </Link>
                 </div>
+
             </div>
         </div>
     );

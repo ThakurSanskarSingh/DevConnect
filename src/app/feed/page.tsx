@@ -30,10 +30,15 @@ export default async function FeedPage() {
 
     return (
         <div style={{ minHeight: '100vh', background: 'var(--bg-primary)', paddingTop: '64px' }}>
-            <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 16px', display: 'grid', gridTemplateColumns: '240px 1fr 280px', gap: '32px', paddingTop: '32px' }}>
+            <div 
+                className="grid grid-cols-1 lg:grid-cols-[240px_1fr_280px] gap-8 px-4 sm:px-6 lg:px-4"
+                style={{ maxWidth: '1280px', margin: '0 auto', paddingTop: '32px' }}
+            >
+
 
                 {/* ── Left Sidebar ── */}
-                <aside style={{ position: 'sticky', top: '96px', height: 'fit-content' }}>
+                <aside className="hidden lg:block" style={{ position: 'sticky', top: '96px', height: 'fit-content' }}>
+
                     {/* Profile card (Auth only) */}
                     {session ? (
                         <div className="dp-card" style={{ padding: '20px', marginBottom: '16px' }}>
@@ -131,19 +136,21 @@ export default async function FeedPage() {
                                     title={post.title}
                                     excerpt={stripMarkdown(post.content).slice(0, 200)}
                                     tags={post.tags}
-                                    author={{ name: post.author.name, username: post.author.username }}
+                                    author={{ id: post.author.id, name: post.author.name, username: post.author.username }}
                                     createdAt={post.createdAt}
                                     commentCount={post.comments.length}
                                     likeCount={post.likes.length}
                                     featured={i === 0}
                                 />
+
                             ))
                         )}
                     </div>
                 </main>
 
                 {/* ── Right Sidebar ── */}
-                <aside style={{ position: 'sticky', top: '96px', height: 'fit-content', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <aside className="hidden lg:block" style={{ position: 'sticky', top: '96px', height: 'fit-content', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+
                     {/* Trending tags */}
                     <div className="dp-card" style={{ padding: '20px' }}>
                         <h3 className="font-bebas" style={{ fontSize: '18px', color: '#F0F0F0', marginBottom: '4px', borderBottom: '2px solid #C6F135', paddingBottom: '8px', display: 'inline-block' }}>

@@ -13,6 +13,7 @@ export function Navbar() {
 
     return (
         <nav
+            className="px-4 sm:px-8"
             style={{
                 position: 'fixed',
                 top: 0,
@@ -26,9 +27,9 @@ export function Navbar() {
                 height: '64px',
                 display: 'flex',
                 alignItems: 'center',
-                padding: '0 32px',
             }}
         >
+
             <div
                 style={{
                     maxWidth: '1280px',
@@ -43,24 +44,24 @@ export function Navbar() {
                 {/* Logo */}
                 <Link
                     href={session ? '/feed' : '/'}
+                    className="flex items-center gap-2"
                     style={{
                         fontFamily: "'Syne', sans-serif",
                         fontWeight: 800,
-                        fontSize: '22px',
+                        fontSize: 'clamp(18px, 4vw, 22px)',
                         color: '#F0F0F0',
                         textDecoration: 'none',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px',
                         letterSpacing: '-0.01em',
                     }}
                 >
                     <span style={{ color: '#C6F135', fontSize: '18px' }}>⌨</span>
-                    devConnect
+                    <span className={isLanding ? 'inline' : 'hidden sm:inline'}>devConnect</span>
+                    {!isLanding && <span className="inline sm:hidden">devC</span>}
                 </Link>
 
+
                 {/* Nav links */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+                <div className="hidden md:flex items-center gap-6">
                     {!isLanding && <NavLink href="/feed" current={pathname}>Feed</NavLink>}
                     {session && !isLanding && (
                         <>
@@ -72,19 +73,21 @@ export function Navbar() {
                     )}
                 </div>
 
+
                 {/* Right side */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div className="flex items-center gap-2 sm:gap-4">
                     {session ? (
                         <>
                             {/* Avatar */}
-                            <div
+                            <Link href="/profile"
                                 style={{
-                                    width: 36,
-                                    height: 36,
+                                    width: 32,
+                                    height: 32,
                                     borderRadius: '50%',
                                     background: 'linear-gradient(135deg, #C6F135, #FF5C28)',
                                     padding: '2px',
                                     cursor: 'pointer',
+                                    flexShrink: 0,
                                 }}
                                 title={session.user?.name || 'Profile'}
                             >
@@ -99,32 +102,33 @@ export function Navbar() {
                                         justifyContent: 'center',
                                         fontFamily: "'Syne', sans-serif",
                                         fontWeight: 700,
-                                        fontSize: '14px',
+                                        fontSize: '12px',
                                         color: '#C6F135',
                                     }}
                                 >
                                     {session.user?.name?.[0]?.toUpperCase() || '?'}
                                 </div>
-                            </div>
+                            </Link>
 
-                            <Link href="/create" className="btn-primary" style={{ padding: '8px 20px', fontSize: '14px', textDecoration: 'none' }}>
+                            <Link href="/create" className="btn-primary hidden sm:block" style={{ padding: '8px 16px', fontSize: '13px', textDecoration: 'none' }}>
                                 + New Post
                             </Link>
 
                             <button
                                 onClick={() => signOut({ callbackUrl: '/' })}
                                 className="btn-ghost"
-                                style={{ padding: '7px 16px', fontSize: '13px' }}
+                                style={{ padding: '6px 12px', fontSize: '12px' }}
                             >
-                                Sign Out
+                                <span className="hidden sm:inline">Sign Out</span>
+                                <span className="sm:hidden">Exit</span>
                             </button>
                         </>
                     ) : (
                         <>
-                            <Link href="/feed" className="btn-ghost" style={{ padding: '8px 20px', fontSize: '14px', textDecoration: 'none' }}>
-                                Browse Feed
+                            <Link href="/feed" className="btn-ghost px-4 py-2 text-xs sm:text-sm" style={{ textDecoration: 'none' }}>
+                                Feed
                             </Link>
-                            <button onClick={() => signIn('github')} className="btn-primary" style={{ padding: '9px 22px', fontSize: '14px' }}>
+                            <button onClick={() => signIn('github')} className="btn-primary px-4 py-2 text-xs sm:text-sm">
                                 Sign In
                             </button>
                         </>

@@ -4,6 +4,8 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Link from 'next/link';
 import { ReactionBar } from '@/components/ReactionBar';
+import { DeletePostButton } from '@/components/DeletePostButton';
+
 import { CommentsSection } from '@/components/CommentWrapper';
 import { MarkdownRenderer } from '@/components/MarkdownRenderer';
 import { decodePostContent } from '@/lib/post-utils';
@@ -29,7 +31,8 @@ export default async function PostDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-    await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
+
 
     const post = await prisma.post.findUnique({
         where: { id },
@@ -42,7 +45,10 @@ export default async function PostDetailPage({
 
     if (!post) notFound();
 
+    const isAuthor = session?.user && (session.user as { id: string }).id === post.authorId;
+
     const { title, tags, content } = decodePostContent(post.content);
+
 
     return (
         <div style={{ minHeight: '100vh', background: 'var(--bg-primary)', paddingTop: '64px' }}>
@@ -76,9 +82,13 @@ export default async function PostDetailPage({
 
                 {/* Post header */}
                 <div style={{ marginBottom: '32px' }}>
-                    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '12px' }}>
-                        {tags.map(t => <span key={t} className="dp-tag">{t}</span>)}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px', marginBottom: '12px' }}>
+                        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                            {tags.map(t => <span key={t} className="dp-tag">{t}</span>)}
+                        </div>
+                        {isAuthor && <DeletePostButton postId={post.id} />}
                     </div>
+
                     <p className="font-dm" style={{ fontSize: '13px', color: '#888', marginBottom: '12px' }}>
                         {timeAgo(post.createdAt)} · {readTime(content)}
                     </p>

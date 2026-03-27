@@ -13,17 +13,14 @@ export default async function LandingPage() {
 
       {/* ── Hero ── */}
       <section
+        className="flex flex-col lg:flex-row items-center justify-center lg:justify-between px-6 py-20 lg:px-12 gap-12 lg:gap-16 min-h-[90vh] lg:min-h-screen"
         style={{
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          padding: '0 48px',
           maxWidth: '1280px',
           margin: '0 auto',
           position: 'relative',
-          gap: '48px',
         }}
       >
+
         {/* Lime radial glow */}
         <div style={{
           position: 'absolute',
@@ -34,11 +31,10 @@ export default async function LandingPage() {
         }} />
 
         {/* Left: Text */}
-        <div style={{ flex: '1', minWidth: 0 }}>
+        <div className="flex-1 min-w-0 text-center lg:text-left z-10">
           <h1
-            className="font-bebas"
+            className="font-bebas text-[clamp(48px,12vw,108px)] lg:text-[clamp(64px,8vw,108px)]"
             style={{
-              fontSize: 'clamp(64px, 8vw, 108px)',
               lineHeight: 0.95,
               color: '#F0F0F0',
               marginBottom: '24px',
@@ -50,8 +46,9 @@ export default async function LandingPage() {
             </span>
             <span className="hero-word" style={{ animationDelay: '0.3s', display: 'block' }}>OUT LOUD.</span>
           </h1>
+
           <p
-            className="font-dm"
+            className="font-dm mx-auto lg:mx-0"
             style={{
               fontSize: '18px',
               color: 'var(--text-secondary)',
@@ -62,18 +59,18 @@ export default async function LandingPage() {
               opacity: 0,
             }}
           >
+
             Share thoughts, discoveries, rants, and code wins.<br />
             devConnect is where developers come to be real.
           </p>
           <div
+            className="flex flex-wrap justify-center lg:justify-start gap-4"
             style={{
-              display: 'flex',
-              gap: '16px',
-              flexWrap: 'wrap',
               animation: 'slideUp 0.6s 0.65s ease forwards',
               opacity: 0,
             }}
           >
+
             <Link href="/api/auth/signin" className="btn-primary animate-glow-pulse" style={{ textDecoration: 'none', fontSize: '16px' }}>
               Start Posting Free
             </Link>
@@ -84,9 +81,10 @@ export default async function LandingPage() {
         </div>
 
         {/* Right: Floating mock post card */}
-        <div style={{ flex: '0 0 420px', display: 'flex', justifyContent: 'center' }}>
+        <div className="hidden lg:flex flex-[0_0_420px] justify-center">
           <HeroCard />
         </div>
+
 
         {/* Scroll arrow */}
         <div
@@ -133,7 +131,8 @@ export default async function LandingPage() {
       </section>
 
       {/* ── Feature Cards ── */}
-      <section style={{ padding: '120px 48px', maxWidth: '1280px', margin: '0 auto' }}>
+      <section className="px-6 py-20 lg:px-12 lg:py-32" style={{ maxWidth: '1280px', margin: '0 auto' }}>
+
         <div className="reveal" style={{ marginBottom: '64px' }}>
           <p className="font-mono" style={{ color: 'var(--text-secondary)', fontSize: '12px', letterSpacing: '0.1em', marginBottom: '8px' }}>
             // PLATFORM
@@ -150,7 +149,8 @@ export default async function LandingPage() {
       </section>
 
       {/* ── How It Works ── */}
-      <section style={{ padding: '0 48px 120px', maxWidth: '1280px', margin: '0 auto' }}>
+      <section className="px-6 pb-20 lg:px-12 lg:pb-32" style={{ maxWidth: '1280px', margin: '0 auto' }}>
+
         <div className="reveal" style={{ marginBottom: '64px' }}>
           <h2 className="font-bebas" style={{ fontSize: 'clamp(40px, 5vw, 64px)', color: '#F0F0F0' }}>
             HOW IT WORKS
@@ -197,7 +197,8 @@ export default async function LandingPage() {
       </section>
 
       {/* ── Mock Feed Preview ── */}
-      <section style={{ padding: '0 48px 120px', maxWidth: '1280px', margin: '0 auto' }}>
+      <section className="px-6 pb-20 lg:px-12 lg:pb-32" style={{ maxWidth: '1280px', margin: '0 auto' }}>
+
         <div className="reveal" style={{ marginBottom: '48px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '16px' }}>
           <div>
             <p className="font-mono" style={{ color: 'var(--text-secondary)', fontSize: '12px', letterSpacing: '0.1em', marginBottom: '8px' }}>// COMMUNITY</p>
@@ -205,7 +206,8 @@ export default async function LandingPage() {
           </div>
           <Link href="/feed" className="btn-ghost" style={{ textDecoration: 'none' }}>See all posts →</Link>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
           <div className="reveal">
             <MockPostCard large {...MOCK_POSTS[0]} />
           </div>
@@ -218,13 +220,13 @@ export default async function LandingPage() {
 
       {/* ── CTA Banner ── */}
       <section
-        className="noise-overlay"
+        className="noise-overlay px-6 py-20 lg:py-32"
         style={{
           background: '#C6F135',
-          padding: '100px 48px',
           textAlign: 'center',
         }}
       >
+
         <h2 className="font-bebas reveal" style={{ fontSize: 'clamp(40px, 6vw, 80px)', color: '#0A0A0A', marginBottom: '32px', lineHeight: 1 }}>
           READY TO POST YOUR<br />FIRST THOUGHT?
         </h2>
@@ -250,12 +252,13 @@ export default async function LandingPage() {
 
       {/* ── Footer ── */}
       <footer
+        className="p-6 lg:p-12"
         style={{
           background: 'var(--bg-primary)',
           borderTop: '1px solid #1A1A1A',
-          padding: '48px',
         }}
       >
+
         <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
           <span className="font-syne" style={{ fontWeight: 800, fontSize: '20px', color: '#F0F0F0' }}>
             <span style={{ color: '#C6F135' }}>⌨</span> devConnect
