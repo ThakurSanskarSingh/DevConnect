@@ -12,11 +12,11 @@ export function encodePostContent(meta: PostMeta): string {
     mood: meta.mood,
   });
 
-  return `__DEVPULSE__${header}__DEVPULSE__\n${meta.content}`;
+  return `__devConnect__${header}__devConnect__\n${meta.content}`;
 }
 
 export function decodePostContent(raw: string): PostMeta {
-  const prefix = "__DEVPULSE__";
+  const prefix = "__devConnect__";
 
   if (raw.startsWith(prefix)) {
     const end = raw.indexOf(prefix, prefix.length);
@@ -33,7 +33,7 @@ export function decodePostContent(raw: string): PostMeta {
           mood: parsed.mood || "casual",
           content,
         };
-      } catch {}
+      } catch { }
     }
   }
 

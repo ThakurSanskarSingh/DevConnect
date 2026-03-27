@@ -64,7 +64,7 @@ export default function SignInPage() {
                     }}
                 >
                     <span style={{ color: '#C6F135' }}>⌨</span>
-                    DevPulse
+                    devConnect
                 </div>
 
                 <h1 className="font-bebas" style={{ fontSize: '48px', color: '#F0F0F0', lineHeight: 1, marginBottom: '16px' }}>

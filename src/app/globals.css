@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;700;800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
-/* ─── DevPulse Design Tokens ─── */
+/* ─── devConnect Design Tokens ─── */
 :root {
   --bg-primary: #0A0A0A;
   --bg-secondary: #111111;

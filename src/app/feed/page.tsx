@@ -65,7 +65,7 @@ export default async function FeedPage() {
                         <div className="dp-card" style={{ padding: '24px', marginBottom: '16px', textAlign: 'center' }}>
                             <h3 className="font-bebas" style={{ fontSize: '24px', color: '#C6F135', marginBottom: '12px' }}>NEW HERE?</h3>
                             <p className="font-dm" style={{ fontSize: '14px', color: '#888', lineHeight: 1.6, marginBottom: '20px' }}>
-                                Join DevPulse to start posting, reacting, and connecting with other devs.
+                                Join devConnect to start posting, reacting, and connecting with other devs.
                             </p>
                             <Link href="/api/auth/signin" className="btn-primary" style={{ display: 'block', textDecoration: 'none', padding: '12px' }}>
                                 Get Started

@@ -56,7 +56,7 @@ export function Navbar() {
                     }}
                 >
                     <span style={{ color: '#C6F135', fontSize: '18px' }}>⌨</span>
-                    DevPulse
+                    devConnect
                 </Link>
 
                 {/* Nav links */}

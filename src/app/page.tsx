@@ -63,7 +63,7 @@ export default async function LandingPage() {
             }}
           >
             Share thoughts, discoveries, rants, and code wins.<br />
-            DevPulse is where developers come to be real.
+            devConnect is where developers come to be real.
           </p>
           <div
             style={{
@@ -139,7 +139,7 @@ export default async function LandingPage() {
             // PLATFORM
           </p>
           <h2 className="font-bebas" style={{ fontSize: 'clamp(40px, 5vw, 64px)', color: '#F0F0F0' }}>
-            WHAT IS DEVPULSE?
+            WHAT IS devConnect?
           </h2>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
@@ -244,7 +244,7 @@ export default async function LandingPage() {
             transition: 'transform 0.15s, opacity 0.15s',
           }}
         >
-          Join DevPulse Free
+          Join devConnect Free
         </Link>
       </section>
 
@@ -258,7 +258,7 @@ export default async function LandingPage() {
       >
         <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
           <span className="font-syne" style={{ fontWeight: 800, fontSize: '20px', color: '#F0F0F0' }}>
-            <span style={{ color: '#C6F135' }}>⌨</span> DevPulse
+            <span style={{ color: '#C6F135' }}>⌨</span> devConnect
           </span>
           <div style={{ display: 'flex', gap: '32px' }}>
             {['Home', 'Feed', 'Create', 'About'].map(l => (
@@ -268,7 +268,7 @@ export default async function LandingPage() {
             ))}
           </div>
           <p className="font-dm" style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
-            © 2024 DevPulse · Built for devs, by devs.
+            © 2024 devConnect · Built for devs, by devs.
           </p>
         </div>
       </footer>

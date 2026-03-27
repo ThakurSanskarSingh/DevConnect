@@ -6,8 +6,8 @@ import { ScrollReveal } from '@/components/ScrollReveal';
 import { Toaster } from 'react-hot-toast';
 
 export const metadata = {
-  title: 'DevPulse — Your dev brain, out loud.',
-  description: 'Share thoughts, discoveries, rants, and code wins. DevPulse is where developers come to be real.',
+  title: 'devConnect — Your dev brain, out loud.',
+  description: 'Share thoughts, discoveries, rants, and code wins. devConnect is where developers come to be real.',
   icons: { icon: '/favicon.ico' },
 };
 
