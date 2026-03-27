@@ -314,7 +314,7 @@ export default function CreatePostPage() {
                     opacity: isPending ? 0.7 : 1,
                 }}
             >
-                {isPending ? 'Publishing...' : 'PUBLISH POST 🚀'}
+                {isPending ? 'Publishing...' : 'PUBLISH POST'}
             </button>
         </div>
     );

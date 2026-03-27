@@ -102,7 +102,7 @@ export default async function FeedPage() {
                     ) : (
                         <div className="dp-card" style={{ padding: '24px', borderLeft: '3px solid #C6F135' }}>
                             <h2 className="font-syne" style={{ fontWeight: 700, fontSize: '18px', color: '#F0F0F0', marginBottom: '8px' }}>
-                                Join the conversation 🚀
+                                Join the conversation
                             </h2>
                             <p className="font-dm" style={{ fontSize: '14px', color: '#888', marginBottom: '16px' }}>
                                 Sign in to post your thoughts, react to others, and connect with the community.
