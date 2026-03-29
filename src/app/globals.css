@@ -11,8 +11,8 @@
   --accent-orange: #FF5C28;
   --accent-blue: #4DAAFF;
   --text-primary: #F0F0F0;
-  --text-secondary: #888888;
-  --text-muted: #444444;
+  --text-secondary: #A0A0A0;
+  --text-muted: #707070;
   --border: #222222;
   --border-hover: #C6F135;
   --radius-sm: 4px;
@@ -38,6 +38,7 @@ body {
   background: var(--bg-primary);
   color: var(--text-primary);
   font-family: 'DM Sans', Arial, sans-serif;
+  letter-spacing: 0.03em;
   cursor: none;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -53,7 +54,7 @@ body {
 /* ─── Typography Helpers ─── */
 .font-bebas {
   font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.06em;
 }
 
 .font-syne {

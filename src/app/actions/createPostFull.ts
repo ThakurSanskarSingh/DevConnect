@@ -1,15 +1,16 @@
-"use server";
-
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { revalidatePath } from "next/cache";
 import { encodePostContent } from "@/lib/post-utils";
+import { redirect } from "next/navigation";
 
 export async function createPostFull(formData: FormData) {
   const session = await getServerSession(authOptions);
 
-  if (!session?.user?.id) throw new Error("Unauthorized");
+  if (!session?.user?.id) {
+    redirect("/auth/signin");
+  }
 
   const title = (formData.get("title") as string) || "Untitled";
   const content = (formData.get("content") as string) || "";

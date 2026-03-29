@@ -1,9 +1,8 @@
-"use server";
-
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function deletePost(formData: FormData) {
   const postId = formData.get("postId") as string;
@@ -11,7 +10,7 @@ export async function deletePost(formData: FormData) {
   const session = await getServerSession(authOptions);
 
   if (!session || !session.user?.id) {
-    throw new Error("Unauthorized");
+    redirect("/auth/signin");
   }
 
   const post = await prisma.post.findUnique({
