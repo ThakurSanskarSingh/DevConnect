@@ -1,7 +1,9 @@
 'use client';
 
-import { useRef, useCallback } from 'react';
-import { useState } from 'react';
+import { useRef, useCallback, useState, useTransition } from 'react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { toggleLike } from '@/app/actions/toggleLike';
 
 interface ReactionBarProps {
     postId: string;
@@ -52,6 +54,10 @@ function spawnParticles(el: HTMLElement, emoji: string) {
 }
 
 export function ReactionBar({ postId, initialCounts = {}, userReaction = null }: ReactionBarProps) {
+    const { data: session } = useSession();
+    const router = useRouter();
+    const [isPending, startTransition] = useTransition();
+    
     const [counts, setCounts] = useState<Record<string, number>>({
         fire: initialCounts.fire ?? 0,
         heart: initialCounts.heart ?? 0,
@@ -63,6 +69,11 @@ export function ReactionBar({ postId, initialCounts = {}, userReaction = null }:
     const btnRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
     const handleReact = useCallback((key: string, emoji: string) => {
+        if (!session) {
+            router.push(`/api/auth/signin?callbackUrl=${encodeURIComponent(window.location.href)}`);
+            return;
+        }
+
         const btn = btnRefs.current[key];
         if (btn) {
             btn.classList.remove('reaction-pop');
@@ -84,7 +95,13 @@ export function ReactionBar({ postId, initialCounts = {}, userReaction = null }:
             }
             return next;
         });
-    }, [active]);
+
+        startTransition(async () => {
+            const formData = new FormData();
+            formData.append('postId', postId);
+            await toggleLike(formData);
+        });
+    }, [active, session, router, postId]);
 
     return (
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>

@@ -64,7 +64,7 @@ export function PostCard({ id, title, excerpt, tags, author, createdAt, commentC
             className="dp-card tilt-card p-4 sm:p-6"
             style={{
                 position: 'relative',
-                borderLeft: featured ? '3px solid #C6F135' : undefined,
+                borderLeft: '3px solid #C6F135',
                 transition: 'border-color 0.25s, transform 0.2s, box-shadow 0.25s',
             }}
         >
